@@ -13,7 +13,7 @@ export function login({
   username: string;
   password: string;
 }): Promise<TUser> {
-  return fetch("/api/login", {
+  return fetch("http://24social-network.ru/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export function login({
 }
 
 export function logout(): Promise<void> {
-  return fetch("/api/logout", {
+  return fetch("http://24social-network.ru/logout", {
     method: "GET",
   })
     .then(validateResponse)
@@ -47,7 +47,7 @@ export function getUserMe(): Promise<TUser> {
 }
 
 export function getAllUsers(page: number): Promise<TUsersResponseData> {
-  return fetch(`/api/users?page=${page}`, {
+  return fetch(`http://24social-network.ru/users?page=${page}`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -64,7 +64,7 @@ export function userRegister({
   username: string;
   password: string;
 }): Promise<void> {
-  return fetch("/api/signup", {
+  return fetch("http://24social-network.ru/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export function userRegister({
 }
 
 export function updateUser(updateUserData: Partial<TUser>): Promise<TUser> {
-  return fetch(`/api/users`, {
+  return fetch(`http://24social-network.ru/users`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -93,7 +93,7 @@ export function updateUser(updateUserData: Partial<TUser>): Promise<TUser> {
 }
 
 export function deleteUser(): Promise<void> {
-  return fetch(`/api/users`, {
+  return fetch(`http://24social-network.ru/users`, {
     method: "DELETE",
   })
     .then(validateResponse)

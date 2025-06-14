@@ -3,7 +3,7 @@ import { validateResponse } from "../validateResponse.ts";
 import { PostSchema, PostsListSchema, TPost, TPostsList } from "./types.ts";
 
 export async function getAllPosts(): Promise<TPostsList> {
-  return fetch(`/api/posts`, {
+  return fetch(`http://24social-network.ru/posts`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -12,7 +12,7 @@ export async function getAllPosts(): Promise<TPostsList> {
 }
 
 export async function getPost(id: string): Promise<TPost> {
-  return fetch(`/api/posts/${id}`, {
+  return fetch(`http://24social-network.ru/posts/${id}`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -25,7 +25,7 @@ export async function createPost({
 }: {
   formText: string;
 }): Promise<TPost> {
-  return fetch("/api/posts", {
+  return fetch("http://24social-network.ru/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export async function updatePost({
   postText: string;
   id: string;
 }): Promise<string> {
-  return fetch(`/api/posts/${id}`, {
+  return fetch(`http://24social-network.ru/posts/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export async function updatePost({
 }
 
 export async function fetchDeletePost(id: string): Promise<string> {
-  return fetch(`/api/posts/${id}`, {
+  return fetch(`http://24social-network.ru/posts/${id}`, {
     method: "DELETE",
   })
     .then(validateResponse)
