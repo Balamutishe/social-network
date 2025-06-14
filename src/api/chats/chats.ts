@@ -10,7 +10,7 @@ import {
 } from "./types.ts";
 
 export async function getAllChats(): Promise<TChatsList> {
-  return fetch(`/chats`, {
+  return fetch(`/api/chats`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -22,7 +22,7 @@ export async function getOneChat(
   id: string,
   page: string
 ): Promise<TResponseGetOneChat> {
-  return fetch(`/chats/${id}/${page}`, {
+  return fetch(`/api/chats/${id}/${page}`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -35,7 +35,7 @@ export async function createChat({
 }: {
   formText: string;
 }): Promise<TChat> {
-  return fetch("/chats", {
+  return fetch("/api/chats", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export async function updateChat(
   chatText: string,
   id: string
 ): Promise<string> {
-  return fetch(`/chats/${id}`, {
+  return fetch(`/api/chats/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function updateChat(
 }
 
 export async function fetchDeleteChat(id: string): Promise<string> {
-  return fetch(`/chats/${id}`, {
+  return fetch(`/api/chats/${id}`, {
     method: "DELETE",
   })
     .then(validateResponse)

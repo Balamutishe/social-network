@@ -11,7 +11,7 @@ export async function getAllMessages(
   chatId: string,
   page?: string
 ): Promise<TMessagesResponseData> {
-  return fetch(`/messages/${chatId}?page=${page}`, {
+  return fetch(`/api/messages/${chatId}?page=${page}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export async function getAllMessages(
 }
 
 export async function getMessage(id: string): Promise<TMessage> {
-  return fetch(`/messages/${id}`, {
+  return fetch(`/api/messages/${id}`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -38,7 +38,7 @@ export async function createMessage({
   formText: string;
   chatId?: string;
 }): Promise<TMessage> {
-  return fetch("/messages", {
+  return fetch("/api/messages", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export async function updateMessage({
   messageText: string;
   id: string;
 }): Promise<string> {
-  return fetch(`/messages/${id}`, {
+  return fetch(`/api/messages/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export async function updateMessage({
 }
 
 export async function fetchDeleteMessage(id: string): Promise<string> {
-  return fetch(`/messages/${id}`, {
+  return fetch(`/api/messages/${id}`, {
     method: "DELETE",
   })
     .then(validateResponse)

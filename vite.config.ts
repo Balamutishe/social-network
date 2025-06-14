@@ -5,6 +5,12 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
-    host: "195.58.34.201",
+    proxy: {
+      "/api": {
+        target: "http://24social-network.ru",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
 });
