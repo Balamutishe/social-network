@@ -1,0 +1,28 @@
+#root {
+    width: 100%;
+}
+
+.app-container {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 60px auto;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.main__navbar {
+    padding: 1rem;
+    background-color: darkgoldenrod;
+}
+
+.main__pages-router {
+    padding: 1rem;
+
+    color: #1a1a1a;
+    background-color: #f9f9f9;
+}
