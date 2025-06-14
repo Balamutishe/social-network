@@ -11,19 +11,22 @@ export async function getAllMessages(
   chatId: string,
   page?: string
 ): Promise<TMessagesResponseData> {
-  return fetch(`http://24social-network.ru/messages/${chatId}?page=${page}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  return fetch(
+    `http://www.24social-network.ru/messages/${chatId}?page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then(validateResponse)
     .then((response) => response.json())
     .then((messagesData) => MessagesResponseDataSchema.parse(messagesData));
 }
 
 export async function getMessage(id: string): Promise<TMessage> {
-  return fetch(`http://24social-network.ru/messages/${id}`, {
+  return fetch(`http://www.24social-network.ru/messages/${id}`, {
     method: "GET",
   })
     .then(validateResponse)
@@ -38,7 +41,7 @@ export async function createMessage({
   formText: string;
   chatId?: string;
 }): Promise<TMessage> {
-  return fetch("http://24social-network.ru/messages", {
+  return fetch("http://www.24social-network.ru/messages", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +63,7 @@ export async function updateMessage({
   messageText: string;
   id: string;
 }): Promise<string> {
-  return fetch(`http://24social-network.ru/messages/${id}`, {
+  return fetch(`http://www.24social-network.ru/messages/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -75,7 +78,7 @@ export async function updateMessage({
 }
 
 export async function fetchDeleteMessage(id: string): Promise<string> {
-  return fetch(`http://24social-network.ru/messages/${id}`, {
+  return fetch(`http://www.24social-network.ru/messages/${id}`, {
     method: "DELETE",
   })
     .then(validateResponse)
