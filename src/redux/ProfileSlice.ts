@@ -12,8 +12,6 @@ const initialState: IInitialState = {
     username: "",
     userImg: "/src/assets/149071.png",
     subscriptions: [],
-    posts_ids: [],
-    chats_ids: [],
     status: "",
   },
   authState: false,
