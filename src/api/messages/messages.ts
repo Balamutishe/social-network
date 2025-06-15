@@ -6,28 +6,28 @@ import {
   TMessage,
   TMessagesResponseData,
 } from "./types.ts";
+import { BASE_URL } from "../base-url.ts";
 
 export async function getAllMessages(
   chatId: string,
   page?: string
 ): Promise<TMessagesResponseData> {
-  return fetch(
-    `http://www.24social-network.ru/messages/${chatId}?page=${page}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  return fetch(`${BASE_URL}/messages/${chatId}?page=${page}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(validateResponse)
     .then((response) => response.json())
     .then((messagesData) => MessagesResponseDataSchema.parse(messagesData));
 }
 
 export async function getMessage(id: string): Promise<TMessage> {
-  return fetch(`http://www.24social-network.ru/messages/${id}`, {
+  return fetch(`${BASE_URL}/messages/${id}`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -41,8 +41,9 @@ export async function createMessage({
   formText: string;
   chatId?: string;
 }): Promise<TMessage> {
-  return fetch("http://www.24social-network.ru/messages", {
+  return fetch(`${BASE_URL}/messages`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -63,8 +64,9 @@ export async function updateMessage({
   messageText: string;
   id: string;
 }): Promise<string> {
-  return fetch(`http://www.24social-network.ru/messages/${id}`, {
+  return fetch(`${BASE_URL}/messages/${id}`, {
     method: "PATCH",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -78,8 +80,9 @@ export async function updateMessage({
 }
 
 export async function fetchDeleteMessage(id: string): Promise<string> {
-  return fetch(`http://www.24social-network.ru/messages/${id}`, {
+  return fetch(`${BASE_URL}/messages/${id}`, {
     method: "DELETE",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())

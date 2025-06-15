@@ -8,10 +8,12 @@ import {
   TChatsList,
   TResponseGetOneChat,
 } from "./types.ts";
+import { BASE_URL } from "../base-url.ts";
 
 export async function getAllChats(): Promise<TChatsList> {
-  return fetch(`http://www.24social-network.ru/chats`, {
+  return fetch(`${BASE_URL}/chats`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -22,8 +24,9 @@ export async function getOneChat(
   id: string,
   page: string
 ): Promise<TResponseGetOneChat> {
-  return fetch(`http://www.24social-network.ru/chats/${id}/${page}`, {
+  return fetch(`${BASE_URL}/chats/${id}/${page}`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -35,8 +38,9 @@ export async function createChat({
 }: {
   formText: string;
 }): Promise<TChat> {
-  return fetch("http://www.24social-network.ru/chats", {
+  return fetch(`${BASE_URL}/chats`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -53,8 +57,9 @@ export async function updateChat(
   chatText: string,
   id: string
 ): Promise<string> {
-  return fetch(`http://www.24social-network.ru/chats/${id}`, {
+  return fetch(`${BASE_URL}/chats/${id}`, {
     method: "PATCH",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -68,8 +73,9 @@ export async function updateChat(
 }
 
 export async function fetchDeleteChat(id: string): Promise<string> {
-  return fetch(`http://www.24social-network.ru/chats/${id}`, {
+  return fetch(`${BASE_URL}/chats/${id}`, {
     method: "DELETE",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())

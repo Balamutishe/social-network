@@ -1,10 +1,12 @@
 import { validateResponse } from "../validateResponse.ts";
 
 import { PostSchema, PostsListSchema, TPost, TPostsList } from "./types.ts";
+import { BASE_URL } from "../base-url.ts";
 
 export async function getAllPosts(): Promise<TPostsList> {
-  return fetch(`http://www.24social-network.ru/posts`, {
+  return fetch(`${BASE_URL}/posts`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -12,8 +14,9 @@ export async function getAllPosts(): Promise<TPostsList> {
 }
 
 export async function getPost(id: string): Promise<TPost> {
-  return fetch(`http://www.24social-network.ru/posts/${id}`, {
+  return fetch(`${BASE_URL}/posts/${id}`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -25,8 +28,9 @@ export async function createPost({
 }: {
   formText: string;
 }): Promise<TPost> {
-  return fetch("http://www.24social-network.ru/posts", {
+  return fetch(`${BASE_URL}/posts`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -46,8 +50,9 @@ export async function updatePost({
   postText: string;
   id: string;
 }): Promise<string> {
-  return fetch(`http://www.24social-network.ru/posts/${id}`, {
+  return fetch(`${BASE_URL}/posts/${id}`, {
     method: "PATCH",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -61,8 +66,9 @@ export async function updatePost({
 }
 
 export async function fetchDeletePost(id: string): Promise<string> {
-  return fetch(`http://www.24social-network.ru/posts/${id}`, {
+  return fetch(`${BASE_URL}/posts/${id}`, {
     method: "DELETE",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())

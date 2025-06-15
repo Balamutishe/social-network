@@ -5,6 +5,7 @@ import {
   UserSchema,
   UsersResponseDataSchema,
 } from "./types.ts";
+import { BASE_URL } from "../base-url.ts";
 
 export function login({
   username,
@@ -13,8 +14,9 @@ export function login({
   username: string;
   password: string;
 }): Promise<TUser> {
-  return fetch("http://www.24social-network.ru/login", {
+  return fetch(`${BASE_URL}/login`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -29,8 +31,9 @@ export function login({
 }
 
 export function logout(): Promise<void> {
-  return fetch("http://www.24social-network.ru/logout", {
+  return fetch(`${BASE_URL}/logout`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -38,8 +41,9 @@ export function logout(): Promise<void> {
 }
 
 export function getUserMe(): Promise<TUser> {
-  return fetch("http://www.24social-network.ru", {
+  return fetch(`${BASE_URL}`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -47,8 +51,9 @@ export function getUserMe(): Promise<TUser> {
 }
 
 export function getAllUsers(page: number): Promise<TUsersResponseData> {
-  return fetch(`http://www.24social-network.ru/users?page=${page}`, {
+  return fetch(`${BASE_URL}/users?page=${page}`, {
     method: "GET",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
@@ -64,8 +69,9 @@ export function userRegister({
   username: string;
   password: string;
 }): Promise<void> {
-  return fetch("http://www.24social-network.ru/signup", {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -80,8 +86,9 @@ export function userRegister({
 }
 
 export function updateUser(updateUserData: Partial<TUser>): Promise<TUser> {
-  return fetch(`http://www.24social-network.ru/users`, {
+  return fetch(`${BASE_URL}/users`, {
     method: "PATCH",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -93,8 +100,9 @@ export function updateUser(updateUserData: Partial<TUser>): Promise<TUser> {
 }
 
 export function deleteUser(): Promise<void> {
-  return fetch(`http://www.24social-network.ru/users`, {
+  return fetch(`${BASE_URL}/users`, {
     method: "DELETE",
+    credentials: "include",
   })
     .then(validateResponse)
     .then((response) => response.json())
